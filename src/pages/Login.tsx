@@ -13,7 +13,7 @@ const Login: React.FC = () => {
   }
 
   return (
-    <div className="max-w-5xl">
+    <div className="min-w-screen flex justify-center">
       <Auth
         supabaseClient={supabase}
         appearance={{
