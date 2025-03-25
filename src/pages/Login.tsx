@@ -18,10 +18,6 @@ const Login: React.FC = () => {
         supabaseClient={supabase}
         appearance={{
           theme: ThemeSupa,
-          // className: {
-          //   container: 'bg-primary',
-          //   divider: 'bg-primary',
-          // },
           variables: {
             default: {
               colors: {
