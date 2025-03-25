@@ -9,15 +9,19 @@ const Login: React.FC = () => {
   const { session } = useAuth();
 
   if (session) {
-    return <Navigate to='/dashboard' />;
+    return <Navigate to="/" />;
   }
 
   return (
-    <div className='max-w-5xl'>
+    <div className="max-w-5xl">
       <Auth
         supabaseClient={supabase}
         appearance={{
           theme: ThemeSupa,
+          // className: {
+          //   container: 'bg-primary',
+          //   divider: 'bg-primary',
+          // },
           variables: {
             default: {
               colors: {
@@ -27,8 +31,8 @@ const Login: React.FC = () => {
             },
           },
         }}
-        providers={[]}
-        theme='dark'
+        providers={['google']}
+        theme="dark"
       />
     </div>
   );
