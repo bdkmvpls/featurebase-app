@@ -3,11 +3,15 @@
 @theme {
   --color-app-background: rgb(19 22 31);
   --color-foreground: rgb(178 184 205);
-  --color-primary: rgb(19 22 31);
+  --color-primary: rgb(79 70 229);
   --color-secondary: rgb(28 31 40);
   --color-border: rgb(36 40 49);
   --color-accent: rgb(148 123 255);
   --color-dark-accent: rgb(46 49 59 / 30%);
+  --color-popover: rgb(19 22 31 / 60%);
+  --color-item-hover: rgb(255 255 255 / 5%);
+  --color-dropdown-background: rgb(19 22 31 / 60%);
+  --color-dashboard: rgb(28 31 40);
 }
 
 :root {
@@ -35,9 +39,6 @@ body {
 }
 
 @layer base {
-  /* * {
-    @apply border-border outline-ring/50;
-  } */
   body {
     @apply bg-app-background text-foreground;
   }

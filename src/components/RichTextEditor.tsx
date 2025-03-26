@@ -1,17 +1,10 @@
-import {
-  Bold,
-  //  Code, Image, Paperclip, Video ,
-  Italic,
-  Link,
-  List,
-  ListOrdered,
-} from 'lucide-react';
-import { baseKeymap, toggleMark } from 'prosemirror-commands';
+import { Bold, Italic, Link, List, ListOrdered } from 'lucide-react';
 import { history } from 'prosemirror-history';
-import { ellipsis, emDash, inputRules, smartQuotes } from 'prosemirror-inputrules';
 import { keymap } from 'prosemirror-keymap';
 import { Schema } from 'prosemirror-model';
 import { schema } from 'prosemirror-schema-basic';
+import { baseKeymap, toggleMark } from 'prosemirror-commands';
+import { ellipsis, emDash, inputRules, smartQuotes } from 'prosemirror-inputrules';
 import { addListNodes, wrapInList } from 'prosemirror-schema-list';
 import { EditorState, Plugin as ProseMirrorPlugin, PluginKey, Transaction } from 'prosemirror-state';
 import { Decoration, DecorationSet, EditorView } from 'prosemirror-view';
@@ -33,11 +26,6 @@ const EditorButton: React.FC<EditorButtonProps> = ({ icon, onClick, className = 
     {icon}
   </button>
 );
-
-interface ProseMirrorEditorProps {
-  placeholder?: string;
-  onChange?: (content: string) => void;
-}
 
 const placeholderPluginKey = new PluginKey('placeholder');
 
@@ -66,6 +54,11 @@ function placeholderPlugin(placeholder: string) {
   });
 }
 
+interface ProseMirrorEditorProps {
+  placeholder?: string;
+  onChange?: (content: string) => void;
+}
+
 const ProseMirrorEditor: React.FC<ProseMirrorEditorProps> = ({ placeholder = 'Post description...', onChange }) => {
   const editorRef = useRef<HTMLDivElement>(null);
   const viewRef = useRef<EditorView | null>(null);
@@ -80,7 +73,6 @@ const ProseMirrorEditor: React.FC<ProseMirrorEditorProps> = ({ placeholder = 'Po
         placeholderPlugin(placeholder),
         history(),
         keymap(baseKeymap),
-        // Fix: Pass the rules as an array to inputRules
         inputRules({
           rules: [...smartQuotes, ellipsis, emDash],
         }),

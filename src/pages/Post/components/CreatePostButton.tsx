@@ -1,21 +1,24 @@
 import { CirclePlus } from 'lucide-react';
 
-import { Button, Dialog } from '@radix-ui/themes';
 import CreatePostForm from './CreatePostForm';
+import { Dialog, DialogContent, DialogPortal, DialogTrigger } from '@/components/common/dialog';
+import { Button } from '@/components/common/button';
 
 const CreatePostButton = () => {
   return (
-    <Dialog.Root>
-      <Dialog.Trigger>
-        <Button color="blue" size="2">
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>
           <CirclePlus className="fill-card/30" /> Create A New Post
         </Button>
-      </Dialog.Trigger>
+      </DialogTrigger>
 
-      <Dialog.Content size="4">
-        <CreatePostForm />
-      </Dialog.Content>
-    </Dialog.Root>
+      <DialogPortal>
+        <DialogContent>
+          <CreatePostForm />
+        </DialogContent>
+      </DialogPortal>
+    </Dialog>
   );
 };
 
