@@ -1,51 +1,12 @@
-import { useEffect, useState } from 'react';
-import { Board } from '../types';
-
-const defaultBoards = [
-  {
-    id: '',
-    name: 'All Posts',
-    description: null,
-    created_at: null,
-    updated_at: null,
-  },
-  {
-    id: '2',
-    name: 'Feature Request',
-    description: null,
-    created_at: null,
-    updated_at: null,
-  },
-  {
-    id: '3',
-    name: 'Bugs',
-    description: null,
-    created_at: null,
-    updated_at: null,
-  },
-  {
-    id: '4',
-    name: 'Integrations',
-    description: null,
-    created_at: null,
-    updated_at: null,
-  },
-  {
-    id: '5',
-    name: 'Question',
-    description: null,
-    created_at: null,
-    updated_at: null,
-  },
-];
+import { useQuery } from '@tanstack/react-query';
+import { getAllBoards } from '@/apis';
 
 export default function useGetBoards() {
-  const [boards, setBoards] = useState<Board[]>([]);
+  const { data, isLoading } = useQuery({
+    queryKey: ['boards'],
+    queryFn: getAllBoards,
+  });
 
-  useEffect(() => {
-    // TODO: Fetch boards from supabase
-    setBoards(defaultBoards);
-  }, []);
-
-  return { boards };
+  console.log(data);
+  return { boards: data, isLoading };
 }

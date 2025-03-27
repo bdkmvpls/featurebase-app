@@ -1,11 +1,20 @@
-import { DropDownItem } from '@/components/DropDownContentWithSearch';
+export const MODULES = ['Feedback Portal', 'Widgets', 'Changelog', 'Roadmap', 'Help Center', 'Surveys', 'Other'];
+export type ModuleType = (typeof MODULES)[number];
 
-export const moduleOptions: DropDownItem[] = [
-  { label: 'Feedback Portal', value: 'feedback_portal' },
-  { label: 'Widgets', value: 'widgets' },
-  { label: 'Changelog', value: 'changelog' },
-  { label: 'Roadmap', value: 'roadmap' },
-  { label: 'Help Center', value: 'help_center' },
-  { label: 'Surveys', value: 'surveys' },
-  { label: 'Other', value: 'other' },
+export const INTEGRATIONS = [
+  'New integration',
+  'Jira',
+  'ClickUp',
+  'Intercom',
+  'Zendesk',
+  'Slack',
+  'Discord',
+  'Github',
+  'HubSpot',
+  'Segment',
+  'Azure DevOps',
 ];
+export type IntegrationType = (typeof INTEGRATIONS)[number];
+
+export const issueOptions = ['Dashboard', 'Widget', 'Integration', 'API', 'Other'] as const;
+export type IssueType = (typeof issueOptions)[number];

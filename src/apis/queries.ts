@@ -37,3 +37,51 @@ export const createCommentsTable = `CREATE TABLE comments (
     likes_count INT DEFAULT 0,   
     dislikes_count INT DEFAULT 0
 );`;
+
+export const updatePostsTable = `ALTER TABLE posts
+    ADD COLUMN module VARCHAR(255);
+
+    ALTER TABLE posts
+    ADD COLUMN bug_sources TEXT[];  
+
+    ALTER TABLE posts
+    ADD COLUMN integrations TEXT[];`;
+
+export const createPostDetailsView = `CREATE VIEW post_details AS
+SELECT 
+    p.id AS post_id,
+    p.title,
+    p.description,
+    p.status,
+    b.name AS board_name,
+    p.created_at,
+    p.pinned,
+    -- Get author from the users table
+    u.raw_user_meta_data AS author,
+    -- Get the number of upvotes
+    COALESCE(upvote_count.upvotes, 0) AS upvotes,
+    -- Get the number of comments
+    COALESCE(comment_count.comments, 0) AS comments_count,
+    -- Calculate created_at in terms of time ago (you may need to adjust this according to your system)
+    CONCAT(
+        EXTRACT(EPOCH FROM (CURRENT_TIMESTAMP - p.created_at)) / 60 / 60 / 24, ' days ago'
+    ) AS created_ago
+FROM posts p
+-- Join with boards to get the board name
+JOIN boards b ON p.board_id = b.id
+-- Join with users to get the author name
+LEFT JOIN auth.users u ON p.author = u.id
+-- Subquery to count the number of upvotes
+LEFT JOIN (
+    SELECT post_id, COUNT(*) AS upvotes
+    FROM upvotes
+    GROUP BY post_id
+) AS upvote_count ON p.id = upvote_count.post_id
+-- Subquery to count the number of comments
+LEFT JOIN (
+    SELECT post_id, COUNT(*) AS comments
+    FROM comments
+    GROUP BY post_id
+) AS comment_count ON p.id = comment_count.post_id;
+
+`;

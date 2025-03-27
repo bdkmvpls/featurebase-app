@@ -1,7 +1,7 @@
 import React from 'react';
 import useGetBoardId from '@/hooks/useGetBoardId';
 import useGetBoardItems from '@/hooks/useGetBoardItems';
-import { cn } from '@/utils';
+import { Button } from '@/components/common/button';
 
 const Boards: React.FC = () => {
   const { boards } = useGetBoardItems();
@@ -10,18 +10,16 @@ const Boards: React.FC = () => {
   return (
     <div>
       <p>Boards</p>
-      <div className="p-2 -m-2 max-h-[648px] overflow-auto custom-scrollbar-stronger space-y-1">
+      <div className="p-2 -m-2 max-h-160 overflow-auto custom-scrollbar-stronger space-y-1">
         {boards.map((board) => (
           <div className="flex items-center" key={board.label}>
-            <button
-              className={cn(
-                !board.id || board.id == boardId ? 'bg-dashboard border' : 'bg-transparent',
-                'flex items-center w-full px-2 py-1.5 border-border hover:bg-border text-foreground rounded-md space-x-2 text-sm font-medium'
-              )}
+            <Button
+              variant={!board.id || board.id == boardId ? 'secondary' : 'outline'}
+              className="w-full justify-start"
             >
               <div className="pr-1 mr-1">{board.icon}</div>
               {board.label}
-            </button>
+            </Button>
           </div>
         ))}
       </div>

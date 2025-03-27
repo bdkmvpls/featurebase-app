@@ -28,7 +28,7 @@ const DropDownContentWithSearch: React.FC<IDropDownContentWithSearchProps> = ({
   );
 
   return (
-    <DropdownMenuContent {...componentProps} className={cn('z-[999] w-[238px]', componentProps?.className)}>
+    <DropdownMenuContent {...componentProps} className={cn('z-[999] w-60', componentProps?.className)}>
       <div className="flex items-center border-b border-white/5 px-2">
         <input
           className="placeholder:text-foreground-muted flex border-0 focus:outline-none focus:ring-0 bg-transparent h-9 w-full rounded-md bg-transparent py-3 text-base sm:text-sm outline-none disabled:cursor-not-allowed disabled:opacity-50"
