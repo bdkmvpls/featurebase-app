@@ -40,7 +40,14 @@ export default function useGetBoardItems() {
   const { boards } = useGetBoards();
 
   const boardItems: BoardItemType[] = useMemo(
-    () => boards?.map((board) => ({ ...board, label: board.name, path: '/', icon: getBoardIcons(board.name) })) || [],
+    () =>
+      boards?.map((board) => ({
+        ...board,
+        label: board.name,
+        value: board.name,
+        path: '/',
+        icon: getBoardIcons(board.name),
+      })) || [],
     [boards]
   );
 

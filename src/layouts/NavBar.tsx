@@ -105,7 +105,7 @@ const NavBar: React.FC = () => {
               <DropdownMenuPortal>
                 <DropdownMenuContent align="start">
                   {tab.children.map((item, index) => (
-                    <Link key={index} to={{ pathname: item.path, search: item?.id || '' }}>
+                    <Link key={index} to={{ pathname: item.path, search: item?.id ? `b=${item.id}` : '' }}>
                       <DropdownMenuItem>
                         <span className="flex items-center space-x-2">
                           {item.icon && <span>{item.icon}</span>}

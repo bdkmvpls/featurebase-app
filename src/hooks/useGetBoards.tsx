@@ -7,6 +7,5 @@ export default function useGetBoards() {
     queryFn: getAllBoards,
   });
 
-  console.log(data);
   return { boards: data, isLoading };
 }

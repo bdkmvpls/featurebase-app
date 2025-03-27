@@ -1,14 +1,14 @@
 import { Button } from '@/components/common/button';
-import { issueOptions, IssueType } from '@/utils/contants';
+import { issueOptions } from '@/utils/contants';
 import React from 'react';
 
 interface IssueSelectorProps {
-  issues: IssueType[];
-  onSelectionChange?: (issues: IssueType[]) => void;
+  issues: string[];
+  onSelectionChange?: (issues: string[]) => void;
 }
 
 const IssueSelector: React.FC<IssueSelectorProps> = ({ issues, onSelectionChange }) => {
-  const toggleSelection = (issue: IssueType) => {
+  const toggleSelection = (issue: string) => {
     const newIssues = issues.includes(issue) ? issues.filter((i) => i !== issue) : [...issues, issue];
     onSelectionChange?.(newIssues);
   };
@@ -22,6 +22,7 @@ const IssueSelector: React.FC<IssueSelectorProps> = ({ issues, onSelectionChange
             variant={issues.includes(issue) ? 'default' : 'secondary'}
             onClick={() => toggleSelection(issue)}
             key={issue}
+            type="button"
           >
             {issue}
           </Button>

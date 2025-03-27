@@ -39,15 +39,17 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
               <div className="relative flex items-center justify-center flex-shrink-0 w-5 h-5 rounded-full">
                 <UserAvatar user={author as User} className="w-5 h-5" />
               </div>
-              <p className="text-sm ml-1.5 text-foreground">author 6 days ago</p>
+              <p className="text-sm ml-1.5 text-foreground">
+                <span className="font-bold">{(author as User).name}</span>
+              </p>
             </div>
-            <div className="flex items-center space-x-2 -mb-[3px]">
-              {comments_count && comments_count > 0 && (
+            <div className="flex items-center space-x-2 -mb-1">
+              {comments_count && comments_count > 0 ? (
                 <div className="flex items-center px-2 py-1 text-xs font-medium border-gray-200 rounded-md text-foreground">
                   <MessageCircleMoreIcon size={14} />
-                  <span className="ml-1">{comments_count || 0}</span>
+                  <span className="ml-1">{comments_count}</span>
                 </div>
-              )}
+              ) : null}
               <div>
                 <Capsule>{board_name}</Capsule>
               </div>

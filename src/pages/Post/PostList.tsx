@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getAllPosts } from '@/apis';
 import useGetBoardId from '@/hooks/useGetBoardId';
 import PostCard from './PostCard';
+import EmptyPost from './EmptyPost';
 
 const PostList: React.FC = () => {
   const boardId = useGetBoardId();
@@ -18,9 +19,15 @@ const PostList: React.FC = () => {
         <div className="w-full flex justify-center p-4">Loading...</div>
       ) : (
         <div>
-          {posts?.map((post) => (
-            <PostCard post={post} key={post.post_id} />
-          ))}
+          {posts && posts?.length > 0 ? (
+            <>
+              {posts.map((post) => (
+                <PostCard post={post} key={post.post_id} />
+              ))}
+            </>
+          ) : (
+            <EmptyPost />
+          )}
         </div>
       )}
     </div>

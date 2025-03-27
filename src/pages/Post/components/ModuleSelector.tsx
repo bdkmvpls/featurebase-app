@@ -1,13 +1,13 @@
 import React from 'react';
 import { DropdownMenu, DropdownMenuTrigger } from '@/components/common/dropdown-menu';
 import DropDownContentWithSearch, { DropDownItem } from '@/components/DropDownContentWithSearch';
-import { MODULES, ModuleType } from '@/utils/contants';
+import { MODULES } from '@/utils/contants';
 import { Button } from '@/components/common/button';
 import { ChevronsUpDown } from 'lucide-react';
 
 interface ModuleSelectorProps {
-  module: ModuleType | null;
-  onSelect: (module: ModuleType) => void;
+  module: string | null;
+  onSelect: (module: string) => void;
 }
 
 const ModuleSelector: React.FC<ModuleSelectorProps> = ({ module, onSelect }) => {
@@ -15,7 +15,7 @@ const ModuleSelector: React.FC<ModuleSelectorProps> = ({ module, onSelect }) => 
   const moduleSelected = moduleOptions.find((m) => m.value === module) || null;
 
   const handleSelectModule = (item: DropDownItem) => {
-    onSelect(item.value as ModuleType);
+    onSelect(item.value as string);
   };
 
   return (

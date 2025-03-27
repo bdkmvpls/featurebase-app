@@ -1,12 +1,8 @@
-import { useLocation } from 'react-router';
-
-import useGetBoardItems from './useGetBoardItems';
+import { useSearchParams } from 'react-router';
 
 export default function useGetBoardId() {
-  const location = useLocation();
-  const { boards } = useGetBoardItems();
-  const boardId =
-    location?.pathname === '/posts' ? undefined : boards.find((item) => item.path === location?.pathname)?.id;
+  const [searchParams] = useSearchParams();
 
+  const boardId = searchParams.get('b');
   return { boardId };
 }
