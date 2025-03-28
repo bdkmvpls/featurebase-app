@@ -57,7 +57,10 @@ const PostCard: React.FC<PostCardProps> = ({ post, refetch }) => {
             </div>
           )}
           <p className="text-base font-semibold line-clamp-2 content text-white">{title}</p>
-          <p className="mt-1 text-sm text-gray-400 line-clamp-2 text-foreground">{description}</p>
+          <div
+            className="mt-1 text-sm text-gray-400 line-clamp-2 text-foreground max-h-15"
+            dangerouslySetInnerHTML={{ __html: description || '' }}
+          ></div>
           <div className="flex flex-wrap items-end justify-between gap-3 pt-3.5">
             <div className="flex items-center mr-2">
               <div className="relative flex items-center justify-center flex-shrink-0 w-5 h-5 rounded-full">
