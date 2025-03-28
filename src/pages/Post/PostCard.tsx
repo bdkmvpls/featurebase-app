@@ -92,7 +92,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, refetch }) => {
         aria-label={`${upvote_count} upvotes. Click to upvote`}
         className="cursor-pointer w-14 sm:w-16 flex flex-shrink-0 flex-col items-center justify-center py-2 border-l border-dark-accent/40 hover:border-dark-accent main-transition group hover:bg-border/50"
         disabled={isPending}
-        onClick={() => mutateAsync({ post_id: post_id || '', user_id: user?.id || '', isUp: isUpvoted })}
+        onClick={() => mutateAsync({ post_id: post_id || '', user_id: user?.id || '', isUp: !isUpvoted })}
       >
         <div className="w-full group-hover:text-foreground main-transition text-background-accent flex flex-col items-center justify-center pb-1 px-2 rounded-md">
           <ChevronUp size={20} />
