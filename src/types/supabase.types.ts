@@ -135,6 +135,13 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: 'boards';
             referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'posts_board_id_fkey';
+            columns: ['board_id'];
+            isOneToOne: false;
+            referencedRelation: 'post_details';
+            referencedColumns: ['board_id'];
           }
         ];
       };
@@ -173,16 +180,18 @@ export type Database = {
       post_details: {
         Row: {
           author: Json | null;
+          board_id: string | null;
           board_name: string | null;
           comments_count: number | null;
-          created_ago: string | null;
+          created_ago: number | null;
           created_at: string | null;
           description: string | null;
           pinned: boolean | null;
           post_id: string | null;
           status: Database['public']['Enums']['post_status_enum'] | null;
           title: string | null;
-          upvotes: number | null;
+          upvote_count: number | null;
+          upvotes: string[] | null;
         };
         Relationships: [];
       };

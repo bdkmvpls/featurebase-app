@@ -5,19 +5,42 @@ import { ChevronUp, MessageCircleMoreIcon, PinIcon } from 'lucide-react';
 
 import Capsule from '@/components/common/capsule';
 import { User } from '@/types';
+import useGetBoardItems from '@/hooks/useGetBoardItems';
+import { useNavigate } from 'react-router';
+import { useAuth } from '@/contexts/AuthContext';
+import { useMutation } from '@tanstack/react-query';
+import { upvotePost } from '@/apis';
 
 interface PostCardProps {
   post: PostDetail;
+  refetch: VoidFunction;
 }
 
-const PostCard: React.FC<PostCardProps> = ({ post }) => {
-  const { title, description, upvotes, author, pinned, board_name, status, comments_count } = post;
+const PostCard: React.FC<PostCardProps> = ({ post, refetch }) => {
+  const { post_id, title, description, upvote_count, upvotes, author, pinned, board_name, status, comments_count } =
+    post;
+
+  const navigate = useNavigate();
+  const { boards } = useGetBoardItems();
+  const { user } = useAuth();
+
+  const postBoard = boards.find((b) => b.value === board_name);
+  const isUpvoted = user?.id && upvotes?.includes(user?.id) ? true : false;
+
+  const { mutateAsync, isPending } = useMutation({
+    mutationFn: async ({ post_id, user_id, isUp }: { post_id: string; user_id: string; isUp: boolean }) =>
+      await upvotePost(post_id, user_id, isUp),
+    onSuccess: () => {
+      refetch();
+    },
+  });
 
   return (
-    <div className="relative flex w-full pr-0 duration-75 ease-in sm:items-stretch hover:bg-border/30 border-y border-border">
+    <div className="relative flex justify-between w-full pr-0 duration-75 ease-in sm:items-stretch hover:bg-border/30 border-y border-border">
       <a
         role="button"
-        className="w-full h-full min-w-0 py-4 pl-4 pr-3 my-auto overflow-auto rounded-md cursor-pointer unstyled-button sm:block sm:pl-5 sm:py-5 "
+        className="flex-1 min-w-0 py-4 pl-4 pr-3 my-auto overflow-auto rounded-md cursor-pointer"
+        onClick={() => navigate(`/posts/${post_id}`, { state: JSON.stringify(post) })}
       >
         <div className="relative">
           {pinned && (
@@ -29,7 +52,8 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 
           {status && (
             <div className="inline-block mb-2">
-              <Capsule color="blue">In Progress</Capsule>
+              {/* TODO */}
+              <Capsule color="blue">{status}</Capsule>
             </div>
           )}
           <p className="text-base font-semibold line-clamp-2 content text-white">{title}</p>
@@ -51,24 +75,27 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
                 </div>
               ) : null}
               <div>
-                <Capsule>{board_name}</Capsule>
+                <Capsule>
+                  {postBoard?.icon}
+                  <span className="ml-1">{board_name}</span>
+                </Capsule>
               </div>
             </div>
           </div>
         </div>
       </a>
 
-      <div className="flex">
-        <button
-          aria-label={`${upvotes} upvotes. Click to upvote`}
-          className="cursor-pointer unstyled-button flex flex-shrink-0 flex-col items-center justify-center w-14 sm:w-16 py-2 border-l border-dark-accent/40 hover:border-dark-accent main-transition group hover:bg-border/50"
-        >
-          <div className="group-hover:text-foreground main-transition cursor-pointer text-background-accent  flex flex-col items-center justify-center pb-1  px-2 rounded-md">
-            <ChevronUp size={20} />
-            <p className="text-sm font-semibold text-gray-100 ">{upvotes || 0}</p>
-          </div>
-        </button>
-      </div>
+      <button
+        aria-label={`${upvote_count} upvotes. Click to upvote`}
+        className="cursor-pointer w-14 sm:w-16 flex flex-shrink-0 flex-col items-center justify-center py-2 border-l border-dark-accent/40 hover:border-dark-accent main-transition group hover:bg-border/50"
+        disabled={isPending}
+        onClick={() => mutateAsync({ post_id: post_id || '', user_id: user?.id || '', isUp: isUpvoted })}
+      >
+        <div className="w-full group-hover:text-foreground main-transition text-background-accent flex flex-col items-center justify-center pb-1 px-2 rounded-md">
+          <ChevronUp size={20} />
+          <p className="text-sm font-semibold text-gray-100 ">{upvote_count || 0}</p>
+        </div>
+      </button>
     </div>
   );
 };

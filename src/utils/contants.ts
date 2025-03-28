@@ -16,5 +16,7 @@ export const INTEGRATIONS = [
 ];
 export type IntegrationType = (typeof INTEGRATIONS)[number];
 
-export const issueOptions = ['Dashboard', 'Widget', 'Integration', 'API', 'Other'] as const;
-export type IssueType = (typeof issueOptions)[number];
+export const ISSUE_OPTIONS = ['Dashboard', 'Widget', 'Integration', 'API', 'Other'] as const;
+export type IssueType = (typeof ISSUE_OPTIONS)[number];
+
+export const STATUSES = ['open', 'closed', 'in-progress'];

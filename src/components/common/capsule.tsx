@@ -6,8 +6,7 @@ interface CapsuleProps {
   color?: 'blue' | 'green' | 'red' | 'purple' | 'default';
 }
 
-const baseStyles =
-  'hover:shadow pointer-events-none px-2 py-0.5  flex items-center text-xs font-medium rounded-md border';
+const baseStyles = 'hover:shadow pointer-events-none px-2 py-1 flex items-center text-xs font-medium rounded-md border';
 
 const colorStyles = {
   default: 'hover:shadow-secondary/20 bg-secondary text-foreground border-border hover:border-border/70',

@@ -105,7 +105,7 @@ const NavBar: React.FC = () => {
               <DropdownMenuPortal>
                 <DropdownMenuContent align="start">
                   {tab.children.map((item, index) => (
-                    <Link key={index} to={{ pathname: item.path, search: item?.id ? `b=${item.id}` : '' }}>
+                    <Link key={index} to={{ pathname: item.path, search: item?.id ? `board_id=${item.id}` : '' }}>
                       <DropdownMenuItem>
                         <span className="flex items-center space-x-2">
                           {item.icon && <span>{item.icon}</span>}
@@ -121,7 +121,7 @@ const NavBar: React.FC = () => {
             <Link to={tab.path} target={tab.external ? '_blank' : ''}>
               <button
                 type="button"
-                className="flex items-center rounded-t-lg rounded-b-none main-transition outline-none border border-b-0 hover:bg-app-background focus:ring-0 font-medium text-sm sm:text-[15px] py-2.5 px-1.5 sm:px-2 text-foreground border-transparent bg-transparent hover:border-border/40 shadow-none"
+                className="flex items-center rounded-t-lg rounded-b-none main-transition outline-none border border-b-0 hover:bg-app-background focus:ring-0 font-medium text-sm sm:text-base py-2.5 px-1.5 sm:px-2 text-foreground border-transparent bg-transparent hover:border-border/40 shadow-none"
                 aria-label="Select feedback board: Feedback"
               >
                 <span className="w-4 h-4 mr-1 sm:w-5 sm:h-5 text-background-accent">

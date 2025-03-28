@@ -1,5 +1,10 @@
 import React, { ComponentProps, useMemo, useState } from 'react';
-import { DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from './common/dropdown-menu';
+import {
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from './common/dropdown-menu';
 import { cn } from '@/utils';
 
 export type DropDownItem = { label: string; value: string; icon?: React.ReactNode; id?: string };
@@ -7,12 +12,16 @@ export type DropDownItem = { label: string; value: string; icon?: React.ReactNod
 interface IDropDownContentWithSearchProps {
   items: DropDownItem[];
   onSelect: (item: DropDownItem) => void;
+  onMultiSelect?: (item: DropDownItem) => void;
   searchInputPlaceholder?: string;
   componentProps?: ComponentProps<typeof DropdownMenuContent>;
+  isSelected?: (item: DropDownItem) => boolean | undefined;
 }
 const DropDownContentWithSearch: React.FC<IDropDownContentWithSearchProps> = ({
   items,
   onSelect,
+  onMultiSelect,
+  isSelected,
   searchInputPlaceholder,
   componentProps,
 }) => {
@@ -40,11 +49,37 @@ const DropDownContentWithSearch: React.FC<IDropDownContentWithSearchProps> = ({
       </div>
       <DropdownMenuSeparator />
       {filteredItems.length > 0 ? (
-        filteredItems?.map((item, index) => (
-          <DropdownMenuItem key={index} onSelect={() => onSelect(item)}>
-            {item.label}
-          </DropdownMenuItem>
-        ))
+        filteredItems?.map((item, index) =>
+          onMultiSelect ? (
+            <DropdownMenuCheckboxItem
+              checked={isSelected?.(item)}
+              onCheckedChange={() => onMultiSelect(item)}
+              key={`${index}_${item.value}`}
+              tabIndex={undefined}
+            >
+              <span
+                className="inline-flex gap-2 items-center"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onSelect?.(item);
+                }}
+              >
+                {item?.icon} {item.label}
+              </span>
+            </DropdownMenuCheckboxItem>
+          ) : (
+            <DropdownMenuItem
+              className="hover:bg-primary/60 hover:text-accent-foreground"
+              tabIndex={undefined}
+              onClick={() => onSelect?.(item)}
+              key={`${index}_${item.value}`}
+            >
+              <span className="inline-flex gap-2 items-center">
+                {item?.icon} {item.label}
+              </span>
+            </DropdownMenuItem>
+          )
+        )
       ) : (
         <div>No Options Found</div>
       )}

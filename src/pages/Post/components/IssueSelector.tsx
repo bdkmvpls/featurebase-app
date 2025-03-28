@@ -1,5 +1,5 @@
 import { Button } from '@/components/common/button';
-import { issueOptions } from '@/utils/contants';
+import { ISSUE_OPTIONS } from '@/utils/contants';
 import React from 'react';
 
 interface IssueSelectorProps {
@@ -17,7 +17,7 @@ const IssueSelector: React.FC<IssueSelectorProps> = ({ issues, onSelectionChange
     <div className="relative z-[50]">
       <p className=" pr-20 text-sm font-medium text-gray-400 dark:text-foreground">What is experiencing an issue?</p>
       <div className="flex flex-wrap mt-3 gap-2.5">
-        {issueOptions.map((issue) => (
+        {ISSUE_OPTIONS.map((issue) => (
           <Button
             variant={issues.includes(issue) ? 'default' : 'secondary'}
             onClick={() => toggleSelection(issue)}

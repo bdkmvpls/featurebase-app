@@ -2,7 +2,7 @@ import CreatePostButton from './components/CreatePostButton';
 
 const EmptyPost = () => {
   return (
-    <div className="mt-4 -mx-4 overflow-hidden rounded-none border-x-0 sm:border-x sm:rounded-lg sm:mx-0 border-accent bg-secondary/80 border-y">
+    <div className="-mx-4 overflow-hidden rounded-none border-x-0 sm:border-x sm:rounded-lg sm:mx-0 border-border bg-secondary/80 border-y">
       <div className="w-full divide-y dark:divide-border divide-gray-100/60">
         <div className="px-4 pb-16 mx-auto">
           <div className="w-full">
@@ -17,7 +17,7 @@ const EmptyPost = () => {
             </div>
 
             <div className="relative max-w-md mx-auto mb-6 space-y-6 overflow-hidden">
-              <div className="relative flex items-end w-full p-5 border rounded-lg shadow-lg border-accent bg-secondary/80">
+              <div className="relative flex items-end w-full p-5 border rounded-lg shadow-lg border-border bg-secondary/80">
                 <div>
                   <div className="h-5 rounded-md w-52 bg-gray-500/10 dark:bg-border"></div>
                   <div className="h-5 mt-3 rounded-md w-36 bg-gray-500/10 dark:bg-border/70"></div>
@@ -27,7 +27,7 @@ const EmptyPost = () => {
                 </div>
               </div>
 
-              <div className="relative flex items-end w-full p-5 border rounded-lg shadow-lg border-accent bg-secondary/80">
+              <div className="relative flex items-end w-full p-5 border rounded-lg shadow-lg border-border bg-secondary/80">
                 <div>
                   <div className="h-5 rounded-md w-28 bg-gray-500/10 dark:bg-border"></div>
                   <div className="h-5 mt-3 rounded-md w-52 bg-gray-500/10 dark:bg-border/70"></div>
@@ -37,7 +37,7 @@ const EmptyPost = () => {
                 </div>
               </div>
 
-              <div className="relative flex items-end w-full p-5 border rounded-lg shadow-lg border-accent bg-secondary/80">
+              <div className="relative flex items-end w-full p-5 border rounded-lg shadow-lg border-border bg-secondary/80">
                 <div>
                   <div className="w-40 h-5 rounded-md bg-gray-500/10 dark:bg-border"></div>
                   <div className="h-5 mt-3 rounded-md w-28 bg-gray-500/10 dark:bg-border/70"></div>

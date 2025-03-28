@@ -130,7 +130,7 @@ const CreatePostForm: React.FC<{ onClose: VoidFunction }> = ({ onClose }) => {
 
         <div className="p-4 border-t border-b border-border bg-popover/50">
           <p className="pr-20 text-sm font-medium text-foreground">To which module does this apply to?</p>
-          <div className="mt-3 max-w-[240px]">
+          <div className="mt-3 max-w-60">
             <ModuleSelector
               module={formik.values.module || null}
               onSelect={(selected) => {
