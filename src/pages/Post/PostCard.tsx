@@ -40,7 +40,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, refetch }) => {
       <a
         role="button"
         className="flex-1 min-w-0 py-4 pl-4 pr-3 my-auto overflow-auto rounded-md cursor-pointer"
-        onClick={() => navigate(`/posts/${post_id}`, { state: JSON.stringify(post) })}
+        // onClick={() => navigate(`/posts/${post_id}`, { state: JSON.stringify(post) })}         //TODO
       >
         <div className="relative">
           {pinned && (
