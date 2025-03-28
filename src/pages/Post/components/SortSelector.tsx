@@ -17,13 +17,13 @@ type SortOption = 'trending' | 'top' | 'new';
 
 const sortOptionToColumn: Record<SortOption, string> = {
   trending: 'comments_count',
-  top: 'votes_count',
+  top: 'upvote_count',
   new: 'created_at',
 };
 
 const columnToSortOption: Record<string, SortOption> = {
   comments_count: 'trending',
-  votes_count: 'top',
+  upvote_count: 'top',
   created_at: 'new',
 };
 
