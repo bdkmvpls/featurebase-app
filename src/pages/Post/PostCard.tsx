@@ -6,7 +6,7 @@ import { ChevronUp, MessageCircleMoreIcon, PinIcon } from 'lucide-react';
 import Capsule from '@/components/common/capsule';
 import { User } from '@/types';
 import useGetBoardItems from '@/hooks/useGetBoardItems';
-import { useNavigate } from 'react-router';
+// import { useNavigate } from 'react-router';
 import { useAuth } from '@/contexts/AuthContext';
 import { useMutation } from '@tanstack/react-query';
 import { upvotePost } from '@/apis';
@@ -20,7 +20,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, refetch }) => {
   const { post_id, title, description, upvote_count, upvotes, author, pinned, board_name, status, comments_count } =
     post;
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { boards } = useGetBoardItems();
   const { user } = useAuth();
 
