@@ -4,9 +4,11 @@ import React from 'react';
 interface CapsuleProps {
   children: React.ReactNode;
   color?: 'blue' | 'green' | 'red' | 'purple' | 'default';
+  className?: string;
 }
 
-const baseStyles = 'hover:shadow pointer-events-none px-2 py-1 flex items-center text-xs font-medium rounded-md border';
+const baseStyles =
+  'hover:shadow pointer-events-none px-2 py-1 flex items-center text-xs font-medium rounded-md border w-fit';
 
 const colorStyles = {
   default: 'hover:shadow-secondary/20 bg-secondary text-foreground border-border hover:border-border/70',
@@ -16,8 +18,8 @@ const colorStyles = {
   purple: 'hover:shadow-purple-700/20 bg-purple-500/10 text-purple-500 border-purple-500/10 hover:border-purple-500/10',
 };
 
-const Capsule: React.FC<CapsuleProps> = ({ children, color = 'default' }) => {
-  return <p className={cn(baseStyles, colorStyles[color])}>{children}</p>;
+const Capsule: React.FC<CapsuleProps> = ({ children, color = 'default', className }) => {
+  return <p className={cn(baseStyles, colorStyles[color], className)}>{children}</p>;
 };
 
 export default Capsule;

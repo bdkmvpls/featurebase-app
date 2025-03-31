@@ -3,16 +3,17 @@ import MainLayout from '../layouts/MainLayouts';
 import NotFound from '../layouts/NotFound';
 import PrivateRoute from '../routes/PrivateRoute';
 import Login from '../pages/Login';
-import PostList from '../pages/Post';
 import Roadmap from '../pages/Roadmap';
 import ChangeLogList from '../pages/Changelog';
+import PostRoutes from '@/pages/Post/PostRoutes';
 
 // MainRoutes Component
 function MainRoutes() {
   return (
     <MainLayout>
       <Routes>
-        <Route path="/" element={<PostList />} />
+        <Route path="/" element={<Navigate to="/p" />} />
+        <Route path="/p/*" element={<PostRoutes />} />
         <Route path="/roadmap" element={<Roadmap />} />
         <Route path="/changelog" element={<ChangeLogList />} />
         <Route path="/#" element={<Navigate to="/" />} />

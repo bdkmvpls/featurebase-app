@@ -1,4 +1,4 @@
-import { CreatePostPayload, PostDetail } from '@/types/posts';
+import { CommentWithUser, CreateCommentPayload, CreatePostPayload, PostDetail } from '@/types/posts';
 import supabase from './supabaseClient';
 import { extractFilterOperatorAndValueFromSearchParamValue } from '@/hooks/useCustomSearchParams';
 import { FilterKey } from '@/hooks/useGetFilterOptions';
@@ -17,6 +17,12 @@ export const getAllPosts = async () => {
   const { data, error } = await supabase.from('post_details').select('*');
   if (error) throw error;
   return data as PostDetail[];
+};
+
+export const getPostById = async (id: string) => {
+  const { data, error } = await supabase.from('post_details').select('*').eq('post_id', id).single();
+  if (error) throw error;
+  return data as PostDetail;
 };
 
 export const upvotePost = async (post_id: string, user_id: string, isUp: boolean) => {
@@ -131,3 +137,19 @@ export async function fetchPostsWithQuery({
   const res = await query;
   return res?.data as PostDetail[];
 }
+
+export const createComment = async (commentData: CreateCommentPayload) => {
+  const { data, error } = await supabase.from('comments').insert(commentData).select('*').single();
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+};
+
+export const getComentByPostId = async (postId: string) => {
+  const { data, error } = await supabase.from('comments_with_authors').select('*').eq('post_id', postId);
+  if (error) throw error;
+  return data as CommentWithUser[];
+};

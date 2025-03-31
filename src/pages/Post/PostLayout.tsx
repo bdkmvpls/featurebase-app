@@ -1,11 +1,11 @@
 import React from 'react';
-import PostList from './PostList';
 import FeedbackBanner from './components/FeedbackBanner';
 import Boards from './Boards';
 import FilterPanel from './components/FilterPanel';
 import SelectedFilters from './components/SelectedFilters';
+import { Outlet } from 'react-router';
 
-const PostPage: React.FC = () => {
+const PostLayout: React.FC = () => {
   return (
     <div className="w-full gap-8 flex flex-col md:flex-row">
       <div className="flex-1 min-h-[70vh]">
@@ -17,7 +17,7 @@ const PostPage: React.FC = () => {
         <SelectedFilters />
 
         <div className="my-4 text-left">
-          <PostList />
+          <Outlet />
         </div>
       </div>
 
@@ -28,4 +28,4 @@ const PostPage: React.FC = () => {
   );
 };
 
-export default PostPage;
+export default PostLayout;

@@ -103,3 +103,22 @@ LEFT JOIN (
 ) AS comment_count ON p.id = comment_count.post_id;
 
 `;
+
+export const createCommentsWithAuthor = `CREATE VIEW comments_with_authors AS
+SELECT
+    c.id AS comment_id,
+    c.post_id,
+    c.author AS author_id,
+    u.id AS user_id,
+    u AS user,
+    c.parent_comment_id,
+    c.content,
+    c.created_at,
+    c.updated_at,
+    c.likes_count,
+    c.dislikes_count
+FROM
+    comments c
+LEFT JOIN
+    auth.users u ON c.author = u.id;
+`;

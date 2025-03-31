@@ -63,11 +63,25 @@ export type Database = {
         };
         Relationships: [
           {
+            foreignKeyName: 'comments_author_fkey';
+            columns: ['author'];
+            isOneToOne: false;
+            referencedRelation: 'comments_with_authors';
+            referencedColumns: ['user_id'];
+          },
+          {
             foreignKeyName: 'comments_parent_comment_id_fkey';
             columns: ['parent_comment_id'];
             isOneToOne: false;
             referencedRelation: 'comments';
             referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'comments_parent_comment_id_fkey';
+            columns: ['parent_comment_id'];
+            isOneToOne: false;
+            referencedRelation: 'comments_with_authors';
+            referencedColumns: ['comment_id'];
           },
           {
             foreignKeyName: 'comments_post_id_fkey';
@@ -130,6 +144,13 @@ export type Database = {
         };
         Relationships: [
           {
+            foreignKeyName: 'posts_author_fkey';
+            columns: ['author'];
+            isOneToOne: false;
+            referencedRelation: 'comments_with_authors';
+            referencedColumns: ['user_id'];
+          },
+          {
             foreignKeyName: 'posts_board_id_fkey';
             columns: ['board_id'];
             isOneToOne: false;
@@ -172,11 +193,70 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: 'posts';
             referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'upvotes_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'comments_with_authors';
+            referencedColumns: ['user_id'];
           }
         ];
       };
     };
     Views: {
+      comments_with_authors: {
+        Row: {
+          author_id: string | null;
+          comment_id: string | null;
+          content: string | null;
+          created_at: string | null;
+          dislikes_count: number | null;
+          likes_count: number | null;
+          parent_comment_id: string | null;
+          post_id: string | null;
+          updated_at: string | null;
+          user: unknown | null;
+          user_id: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'comments_author_fkey';
+            columns: ['author_id'];
+            isOneToOne: false;
+            referencedRelation: 'comments_with_authors';
+            referencedColumns: ['user_id'];
+          },
+          {
+            foreignKeyName: 'comments_parent_comment_id_fkey';
+            columns: ['parent_comment_id'];
+            isOneToOne: false;
+            referencedRelation: 'comments';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'comments_parent_comment_id_fkey';
+            columns: ['parent_comment_id'];
+            isOneToOne: false;
+            referencedRelation: 'comments_with_authors';
+            referencedColumns: ['comment_id'];
+          },
+          {
+            foreignKeyName: 'comments_post_id_fkey';
+            columns: ['post_id'];
+            isOneToOne: false;
+            referencedRelation: 'post_details';
+            referencedColumns: ['post_id'];
+          },
+          {
+            foreignKeyName: 'comments_post_id_fkey';
+            columns: ['post_id'];
+            isOneToOne: false;
+            referencedRelation: 'posts';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
       post_details: {
         Row: {
           author: Json | null;
