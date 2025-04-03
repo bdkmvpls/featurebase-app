@@ -5,7 +5,7 @@ import NotificationMenu from '../components/NotificationMenu';
 
 const ToolBar: React.FC = () => {
   return (
-    <div className="flex justify-between">
+    <div className="w-full flex items-center justify-between">
       <div className="flex justify-start items-center">
         <img src={imgLogo} className="w-9 h-9 rounded-full" alt="logo" />
         <h2 className="text-white text-xl ml-2 font-bold">Featurebase</h2>

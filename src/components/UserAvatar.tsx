@@ -1,16 +1,30 @@
-import React from 'react';
-import { useAuth } from '../contexts/AuthContext';
-import { Avatar } from '@radix-ui/themes';
+import React, { ComponentProps } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
+import * as AvatarPrimitive from '@radix-ui/react-avatar';
+import { Avatar, AvatarImage, AvatarFallback } from './common/avatar';
+import { User } from '@/types';
 
-const UserAvatar: React.FC = () => {
-  const { user } = useAuth();
+interface UserAvatarProps extends ComponentProps<typeof AvatarPrimitive.Root> {
+  user?: User;
+}
+
+const UserAvatar: React.FC<UserAvatarProps> = ({ user, ...props }) => {
+  const { user: authUser } = useAuth();
+
+  if (user) {
+    return (
+      <Avatar {...props}>
+        <AvatarImage src={user?.avatar_url} alt="user-avatar" />
+        <AvatarFallback>{user?.email?.charAt(0).toUpperCase() || ''}</AvatarFallback>
+      </Avatar>
+    );
+  }
+
   return (
-    <Avatar
-      src={user?.user_metadata.avatar_url}
-      radius="full"
-      size="2"
-      fallback={user?.user_metadata.email?.charAt(0).toUpperCase() || ''}
-    />
+    <Avatar {...props}>
+      <AvatarImage src={authUser?.user_metadata.avatar_url} alt="user-avatar" />
+      <AvatarFallback>{authUser?.user_metadata.email?.charAt(0).toUpperCase() || ''}</AvatarFallback>
+    </Avatar>
   );
 };
 

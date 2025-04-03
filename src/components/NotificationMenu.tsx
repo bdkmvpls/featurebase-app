@@ -1,21 +1,21 @@
-import { DropdownMenu } from '@radix-ui/themes';
 import React from 'react';
 import { Bell } from 'lucide-react';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './common/dropdown-menu';
 
 const NotificationMenu: React.FC = () => {
   return (
-    <DropdownMenu.Root>
-      <DropdownMenu.Trigger>
+    <DropdownMenu>
+      <DropdownMenuTrigger>
         <div className="rounded-full cursor-pointer w-9 h-9 text-foreground bg-secondary border border-border flex justify-center items-center">
           <Bell />
         </div>
-      </DropdownMenu.Trigger>
-      <DropdownMenu.Content size="2">
-        <DropdownMenu.Item className="text-foreground">
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuItem className="text-foreground">
           <span> Inbox</span>
-        </DropdownMenu.Item>
-      </DropdownMenu.Content>
-    </DropdownMenu.Root>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 
